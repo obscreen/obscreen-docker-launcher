@@ -1,0 +1,17 @@
+[Unit]
+Description=Obscreen Offline Docker Launcher
+After=network.target
+
+[Service]
+User=pi
+Group=pi
+Environment=VIRTUAL_ENV="/home/pi/obscreen-offline-docker-launcher/venv"
+WorkingDirectory=/home/pi/obscreen-offline-docker-launcher
+ExecStart=/home/pi/obscreen-offline-docker-launcher/venv/bin/python /home/pi/obscreen-offline-docker-launcher/obscreen-offline-docker-launcher.py
+Restart=always
+RestartSec=5
+StandardOutput=inherit
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
