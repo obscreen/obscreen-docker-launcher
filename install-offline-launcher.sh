@@ -64,7 +64,8 @@ PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
 PYTHON_MINOR_VERSION=$(echo "$PYTHON_VERSION" | cut -d. -f2)
 
 # Build filename based on architecture and Python version
-BINARY_NAME="obscreen-offline-launcher-linux.${ARCH}-py3.${PYTHON_MINOR_VERSION}.tar"
+BINARY_DIR_NAME="obscreen-offline-launcher-linux.${ARCH}-py3.${PYTHON_MINOR_VERSION}"
+BINARY_NAME="${BINARY_DIR_NAME}.tar"
 DOWNLOAD_URL="${BASE_URL}/${BINARY_NAME}"
 
 # Attempt to download the binary
@@ -83,8 +84,9 @@ else
 fi
 
 tar -vxf $BINARY_NAME 
-mv $BINARY_NAME/* .
-rm -rf $BINARY_NAME
+mv $BINARY_DIR_NAME/* .
+rm -rf $BINARY_DIR_NAME
+rm $BINARY_NAME
 
 # Install application dependencies
 python3 -m venv venv
