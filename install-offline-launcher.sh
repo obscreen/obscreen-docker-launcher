@@ -4,7 +4,7 @@ OWNER=${1:-$USER}
 WORKING_DIR=${2:-$HOME}
 
 echo "# ==============================="
-echo "# Installing Obscreen Offline Docker Launcher"
+echo "# Installing Obscreen Offline Launcher"
 echo "# Using User: $OWNER"
 echo "# Using Python: $(which python3)"
 echo "# Working Directory: $WORKING_DIR"
@@ -24,10 +24,10 @@ apt-get install -y git build-essential gcc python3-dev python3-pip python3-venv
 
 # Get files
 cd $WORKING_DIR
-mkdir -p obscreen-offline-docker-launcher
-cd obscreen-offline-docker-launcher
+mkdir -p obscreen-offline-launcher
+cd obscreen-offline-launcher
 
-REPO="obscreen/obscreen-offline-docker-launcher"
+REPO="obscreen/obscreen-offline-launcher"
 VERSION=$(curl -s "https://api.github.com/repos/$REPO/releases/latest" | grep -oP '"tag_name": "\K(.*)(?=")')
 
 # Check if VERSION was fetched successfully
@@ -64,7 +64,7 @@ PYTHON_VERSION=$(python3 --version 2>&1 | awk '{print $2}')
 PYTHON_MINOR_VERSION=$(echo "$PYTHON_VERSION" | cut -d. -f2)
 
 # Build filename based on architecture and Python version
-BINARY_NAME="obscreen-offline-docker-launcher-linux.${ARCH}-py3.${PYTHON_MINOR_VERSION}.tar"
+BINARY_NAME="obscreen-offline-launcher-linux.${ARCH}-py3.${PYTHON_MINOR_VERSION}.tar"
 DOWNLOAD_URL="${BASE_URL}/${BINARY_NAME}"
 
 # Attempt to download the binary
@@ -102,9 +102,9 @@ chown -R $OWNER:$OWNER ./
 # Systemd service installation
 # ============================================================
 
-curl https://raw.githubusercontent.com/obscreen/obscreen-offline-docker-launcher/refs/heads/main/obscreen-offline-docker-launcher.service | sed "s#/home/pi#$WORKING_DIR#g" | sed "s#=pi#=$OWNER#g" | tee /etc/systemd/system/obscreen-offline-docker-launcher.service
+curl https://raw.githubusercontent.com/obscreen/obscreen-offline-launcher/refs/heads/main/obscreen-offline-launcher.service | sed "s#/home/pi#$WORKING_DIR#g" | sed "s#=pi#=$OWNER#g" | tee /etc/systemd/system/obscreen-offline-launcher.service
 systemctl daemon-reload
-systemctl enable obscreen-offline-docker-launcher.service
+systemctl enable obscreen-offline-launcher.service
 
 # ============================================================
 # Start
