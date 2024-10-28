@@ -110,4 +110,4 @@ systemctl enable obscreen-offline-launcher.service
 # Start
 # ============================================================
 
-systemctl restart obscreen-offline-docker-launcher.service
+systemctl restart obscreen-offline-launcher.service
