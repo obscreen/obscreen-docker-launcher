@@ -1,2 +1,2 @@
-# Obscreen Offline Docker Launcher
-Docker launcher server to run Obscreen in offline mode
+# Obscreen Offline Launcher
+Offline launcher server to run Obscreen in offline mode
